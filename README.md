@@ -31,8 +31,9 @@ particle explosions.
 
 # What do you wish you’d done differently?
 I wish I had been more successful at making the fireworks look realistic both in coloring and in movement. It would have 
-been cool to use some shader code to create a more light-like effect of the fireworks. I also wish that I had taken some
-more time to design my firework implementation - in the end, I feel that my implementation is a bit disorganized and took
+been cool to use some shader code to create a more light-like effect of the fireworks. At one point, I made my fireworks 
+point lights, and I loved the way that looked - it would have been cool to find a lower-cost way to mimic that look.
+I also wish that I had taken some more time to design my firework implementation - in the end, I feel that my implementation is a bit disorganized and took
 longer to debug than necessary.
 
 # What do you wish we had done differently?

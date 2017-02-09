@@ -6,14 +6,24 @@ Contains all mesh logic
 
 class Sparkly {
 
-    constructor(x, y, z, t) {
+    constructor(x, y, z, t, col) {
 
         // var sphere = new THREE.SphereGeometry( 0.5, 16, 8 );
 		// this.missile = new THREE.PointLight( 0xff0040, 2, 50 );
 		// this.missile.add( new THREE.Mesh( sphere, new THREE.MeshBasicMaterial( { color: 0xff0040 } ) ) );
-        this.geometry = new THREE.SphereGeometry(0.5, 32, 32);
-        // this.material = new THREE.MeshLambertMaterial({color: 0xffe100,  emissive: 0xa4f7f9, emissiveIntensity: 0.3 });
-        this.material = new THREE.MeshBasicMaterial({color: 0xffe100});        
+
+
+
+        this.geometry = new THREE.SphereGeometry(0.5, 16, 8);
+        var color;
+        if (col) {
+            this.color = 0xFF44B1;
+         
+        } else {
+            this.color = 0xFF7B8D;     
+        }
+
+        this.material = new THREE.MeshLambertMaterial({color: color,  emissive: color, emissiveIntensity: 0.3 });              
         this.missile = new THREE.Mesh(this.geometry, this.material);
 
         
@@ -45,7 +55,7 @@ class Sparkly {
     explode(scene, f_x, f_y, f_z) {
         for (var i = 0; i < 4; i++) {
             var bitGeo = new THREE.IcosahedronGeometry(0.25);
-            var bitMat = new THREE.MeshLambertMaterial({color: 0xffe100,  emissive: 0xa4f7f9, emissiveIntensity: 0.3 });
+            var bitMat = new THREE.MeshLambertMaterial({color: this.color,  emissive: this.color, emissiveIntensity: 0.5 });
             var bit = new THREE.Mesh(bitGeo, bitMat);
             scene.add(bit);
             bit.position.z = f_z;

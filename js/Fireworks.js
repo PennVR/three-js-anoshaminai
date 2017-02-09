@@ -23,7 +23,13 @@ class Fireworks {
         var x = Math.floor(Math.random() * 200) + 1;
         x *= Math.floor(Math.random() * 2) == 1 ? 1 : -1;
         var t = this.getRandomArbitrary(0.5, 1);
-        return new Sparkly(x, 10, -(Math.random() * 10 + 30), t);
+        var col;
+        if (Math.random() < 0.4) {
+            col = true;
+        } else {
+            col = false;
+        }
+        return new Sparkly(x, 0, -(Math.random() * 10 + 70), t, col);
     }
 
 
@@ -64,7 +70,7 @@ class Fireworks {
         }
 
         var newExp = Math.random();
-        if (newExp < 0.05 && this.fireworks.length < 8) {
+        if (newExp < 0.03 && this.fireworks.length < 8) {
             var f = this.genSparkly();
             this.fireworks.push(f);
             scene.add(f);
