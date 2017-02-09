@@ -9,10 +9,10 @@
 		</style>
 	</head>
 	<body>
+		<script src="js/threejs/three.min.js"></script>
 		<script src="js/controls/VRControls.js"></script>
 		<script src="js/effects/VREffect.js"></script>
-		<script src="js/vr/WebVR.js"></script>
-		<script src="js/threejs/three.min.js"></script>
+		<script src="js/WebVR.js"></script>
 		<script src="js/controls/PointerLockControl.js"></script>
 		<script src="js/effects/PerlinNoise.js"></script>
 		<script src="js/Sparkly.js"></script>
@@ -38,7 +38,7 @@
 			var blocker = document.getElementById( 'blocker' );
 			var instructions = document.getElementById( 'instructions' );
 
-			// http://www.html5rocks.com/en/tutorials/pointerlock/intro/
+			http://www.html5rocks.com/en/tutorials/pointerlock/intro/
 			var havePointerLock = 'pointerLockElement' in document || 'mozPointerLockElement' in document || 'webkitPointerLockElement' in document;
 			if ( havePointerLock ) {
 				var element = document.body;
@@ -147,27 +147,26 @@
 				renderer.setSize( window.innerWidth, window.innerHeight );
 				document.body.appendChild( renderer.domElement );
 
-				// // === VR STUFF
-				// controls = new THREE.VRControls( camera );
-				// effect = new THREE.VREffect( renderer );
+				// === VR STUFF
+				controls = new THREE.VRControls( camera );
+				effect = new THREE.VREffect( renderer );
 
-				// if ( WEBVR.isAvailable() === false ) {
-				// 	document.body.appendChild( WEBVR.getMessage() );
-				// } else {
-				// 	document.body.appendChild( WEBVR.getButton( effect ) );
-				// }
+				if ( WEBVR.isAvailable() === false ) {
+					document.body.appendChild( WEBVR.getMessage() );
+				} else {
+					document.body.appendChild( WEBVR.getButton( effect ) );
+				}
 
 			}
 
 			function animate() {
-				// effect.requestAnimationFrame( animate );
-				// render();
-				// effect.render(scene, camera);
-				// controls.update();
+				effect.requestAnimationFrame( animate );
+				controls.update();				
+				effect.render(scene, camera);
 
-				requestAnimationFrame( animate );
+				// requestAnimationFrame( animate );
 				fireworks.lightshow();
-				renderer.render( scene, camera );
+				// renderer.render( scene, camera );
 			}
 
 		</script>
