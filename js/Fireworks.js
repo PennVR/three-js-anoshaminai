@@ -26,7 +26,6 @@ class Fireworks {
 
         for (var i = 0; i < this.fireworks.length; i++) {
             var f = this.fireworks[i];
-            // var explodeStatus = f.launch();
             f.launch();
             
             if (f.explodeStatus) {
@@ -56,13 +55,12 @@ class Fireworks {
             }
         }
 
-
-        // var newExp = Math.random();
-        // if (newExp < 0.3) {
-        //     var f = this.genSparkly();
-        //     this.fireworks.push(f);
-        //      scene.add(f);
-        // }
+        var newExp = Math.random();
+        if (newExp < 0.2 && this.fireworks.length < 10) {
+            var f = this.genSparkly();
+            this.fireworks.push(f);
+            scene.add(f);
+        }
 
     }
 
