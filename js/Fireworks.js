@@ -15,11 +15,15 @@ class Fireworks {
 
     }
 
+    getRandomArbitrary(min, max) {
+        return Math.random() * (max - min) + min;
+    }
+
     genSparkly() {
         var x = Math.floor(Math.random() * 200) + 1;
         x *= Math.floor(Math.random() * 2) == 1 ? 1 : -1;
-        console.log(x);
-        return new Sparkly(x, 10, -(Math.random() * 10 + 30), Math.random());
+        var t = this.getRandomArbitrary(0.5, 1);
+        return new Sparkly(x, 10, -(Math.random() * 10 + 30), t);
     }
 
 

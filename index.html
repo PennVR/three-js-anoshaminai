@@ -9,6 +9,9 @@
 		</style>
 	</head>
 	<body>
+		<script src="js/controls/VRControls.js"></script>
+		<script src="js/effects/VREffect.js"></script>
+		<script src="js/vr/WebVR.js"></script>
 		<script src="js/threejs/three.min.js"></script>
 		<script src="js/controls/PointerLockControl.js"></script>
 		<script src="js/effects/PerlinNoise.js"></script>
@@ -28,7 +31,7 @@
 			var floor;
 			var camera, scene, renderer;
 			var geometry, material, mesh;
-			var controls;
+			var mouse_controls, controls, effect;
 
 			var fireworks;
 
@@ -109,8 +112,8 @@
 				scene.add( spotLight );
 
 				// === LOOK: Get pointer lock controls
-				controls = new THREE.PointerLockControls( camera );
-				scene.add( controls.getObject() );
+				mouse_controls = new THREE.PointerLockControls( camera );
+				scene.add( mouse_controls.getObject() );
 
 
 				// === LOOK: Setup floor
@@ -136,6 +139,7 @@
 				scene.add( floor );
 
 				fireworks = new Fireworks(scene, 10);
+
 				// === Setup renderer
 				renderer = new THREE.WebGLRenderer();
 				renderer.setClearColor( 0xffffff );
@@ -143,9 +147,24 @@
 				renderer.setSize( window.innerWidth, window.innerHeight );
 				document.body.appendChild( renderer.domElement );
 
+				// // === VR STUFF
+				// controls = new THREE.VRControls( camera );
+				// effect = new THREE.VREffect( renderer );
+
+				// if ( WEBVR.isAvailable() === false ) {
+				// 	document.body.appendChild( WEBVR.getMessage() );
+				// } else {
+				// 	document.body.appendChild( WEBVR.getButton( effect ) );
+				// }
+
 			}
 
 			function animate() {
+				// effect.requestAnimationFrame( animate );
+				// render();
+				// effect.render(scene, camera);
+				// controls.update();
+
 				requestAnimationFrame( animate );
 				fireworks.lightshow();
 				renderer.render( scene, camera );
