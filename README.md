@@ -6,8 +6,9 @@
 https://pennvr.github.io/three-js-anoshaminai/
 
 # Techniques used
-To generate the pseudorandom terrain, I used a Perlin Noise implementation to add noise to the y-values of the floor plane. 
-I created the gradient effect by coloring each vertex of each face a different color.
+To generate the pseudorandom terrain, I used a Perlin Noise implementation to add noise to the y-values of the floor plane. The Perlin 
+Noise generates a nice-looking random distribution that takes into account the vertices original position and the positions of nearby
+vertices. I created the gradient effect by coloring each vertex of each face a different color.
 
 To generate the fireworks, I created sphere objects with psuedorandom x and z coordinates and incremented their y position 
 until they reached a certain height (randomized within a range). Upon reaching the height, I created 4 'bit' geometries 
@@ -18,7 +19,7 @@ There is no need to download or run anything, just click the demo link above. No
 is required. 
 
 # When in VR mode, did you feel any motion sickness? Why and why not?
-
+I didn't feel any motion sickness, 
 
 # What was the hardest part of the assignment?
 Getting a handle on the particulars of graphics programming was a challenge for me. Understanding conceptually
@@ -33,9 +34,9 @@ particle explosions.
 # What do you wish you’d done differently?
 I wish I had been more successful at making the fireworks look realistic both in coloring and in movement. It would have 
 been cool to use some shader code to create a more light-like effect of the fireworks. At one point, I made my fireworks 
-point lights, and I loved the way that looked - it would have been cool to find a lower-cost way to mimic that look.
-I also wish that I had taken some more time to design my firework implementation - in the end, I feel that my implementation is a bit disorganized and took
-longer to debug than necessary.
+point lights, and I loved the way that looked - it would have been cool to find a lower-cost way to mimic that look. I think that using
+PointMaterial would have been a better option. I also wish that I had taken some more time to design my firework implementation - 
+in the end, I feel that my implementation is a bit disorganized and took longer to debug than necessary.
 
 # What do you wish we had done differently?
 It would have been nice to have more time with Three.js and to be exposed to more of the advanced features. For example,
