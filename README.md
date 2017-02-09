@@ -2,9 +2,10 @@
 
 # Anosha Minai - CandyLand 
 
-Link to GitHub Pages site
+# Link to GitHub Pages site
+https://pennvr.github.io/three-js-anoshaminai/
 
-# Techniques used, and why those techniques
+# Techniques used
 To generate the pseudorandom terrain, I used a Perlin Noise implementation to add noise to the y-values of the floor plane. 
 I created the gradient effect by coloring each vertex of each face a different color.
 
