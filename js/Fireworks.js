@@ -25,14 +25,37 @@ class Fireworks {
     lightshow() {
 
         for (var i = 0; i < this.fireworks.length; i++) {
-            var explodeStatus = this.fireworks[i].launch();
-            if (explodeStatus) {
-                scene.remove(this.fireworks[i].missile);
-                this.explosions.push(this.fireworks[i].explode());
+            var f = this.fireworks[i];
+            // var explodeStatus = f.launch();
+            f.launch();
+            
+            if (f.explodeStatus) {
+                var f_x = f.missile.position.x;
+                var f_y = f.missile.position.y;
+                var f_z = f.missile.position.z;
+                scene.remove(f.missile);
+                this.fireworks.splice(i,1);
+                f.explode(this.scene, f_x, f_y, f_z);
+                this.explosions.push(f);
+                console.log("explosion");
+                f.explodeStatus = false;
             }
-
-
         }
+
+        for (var j = 0; j < this.explosions.length; j++) {
+            var ex = this.explosions[j];
+            ex.explosionTraj();
+            if (ex.sparkleStatus) {
+                scene.remove(ex.bits[0]);
+                scene.remove(ex.bits[1]);
+                scene.remove(ex.bits[2]);
+                scene.remove(ex.bits[3]);
+                this.explosions.splice(j, 1);
+                console.log("explosion complete");
+                ex.sparkleStatus = false;
+            }
+        }
+
 
         // var newExp = Math.random();
         // if (newExp < 0.3) {

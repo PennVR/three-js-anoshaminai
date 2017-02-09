@@ -30,7 +30,7 @@
 			var geometry, material, mesh;
 			var controls;
 
-			var f;
+			var fireworks;
 
 			var blocker = document.getElementById( 'blocker' );
 			var instructions = document.getElementById( 'instructions' );
@@ -135,9 +135,7 @@
 				floor = new THREE.Mesh( geometry, material );
 				scene.add( floor );
 
-				f = new Fireworks(scene, 6);
-				// scene.add(f.missile);
-
+				fireworks = new Fireworks(scene, 3);
 				// === Setup renderer
 				renderer = new THREE.WebGLRenderer();
 				renderer.setClearColor( 0xffffff );
@@ -149,7 +147,7 @@
 
 			function animate() {
 				requestAnimationFrame( animate );
-				f.lightshow();
+				fireworks.lightshow();
 				renderer.render( scene, camera );
 			}
 
