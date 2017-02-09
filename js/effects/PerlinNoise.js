@@ -61,7 +61,6 @@ class PerlinNoise {
         var bbb = p[p[p[this.inc(xint)] + this.inc(yint)] + this.inc(zint)];
 
         var ltop = this.lerp( this.grad(aaa, xdec, ydec - 1, zdec), this.grad(aab, xdec - 1, ydec - 1, zdec), u);
-
         var lbottom = this.lerp ( this.grad(aba, xdec, ydec, zdec), this.grad(abb, xdec - 1, ydec, zdec), u);
         var front = this.lerp(ltop, lbottom, v);
 

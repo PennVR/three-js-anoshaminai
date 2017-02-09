@@ -12,6 +12,8 @@
 		<script src="js/threejs/three.min.js"></script>
 		<script src="js/controls/PointerLockControl.js"></script>
 		<script src="js/effects/PerlinNoise.js"></script>
+		<script src="js/Sparkly.js"></script>
+		<script src="js/Fireworks.js"></script>
 		<div id="blocker">
 
 			<div id="instructions">
@@ -27,6 +29,8 @@
 			var camera, scene, renderer;
 			var geometry, material, mesh;
 			var controls;
+
+			var f;
 
 			var blocker = document.getElementById( 'blocker' );
 			var instructions = document.getElementById( 'instructions' );
@@ -84,10 +88,25 @@
 				camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 1000 );
 				scene = new THREE.Scene();
 
+
+				scene.background = new THREE.Color( 0xb3d8df );
+
 				// === LOOK: Setup light
 				var light = new THREE.HemisphereLight( 0xeeeeff, 0x777788, 0.75 );
 				light.position.set( 0.5, 1, 0.75 );
+				var spotLight = new THREE.SpotLight( 0xffffff, 1 );
+				spotLight.position.set( 30, 100, 35 );
+				spotLight.castShadow = true;
+				spotLight.angle = Math.PI / 4;
+				spotLight.penumbra = 0.05;
+				spotLight.decay = 2;
+				spotLight.distance = 200;
+				spotLight.shadow.mapSize.width = 1024;
+				spotLight.shadow.mapSize.height = 1024;
+				spotLight.shadow.camera.near = 1;
+				spotLight.shadow.camera.far = 200;
 				scene.add( light );
+				scene.add( spotLight );
 
 				// === LOOK: Get pointer lock controls
 				controls = new THREE.PointerLockControls( camera );
@@ -95,24 +114,29 @@
 
 
 				// === LOOK: Setup floor
-				geometry = new THREE.PlaneGeometry( 100, 2000, 100, 100 );
+				geometry = new THREE.PlaneGeometry( 2000, 2000, 100, 100 );
 				geometry.rotateX( - Math.PI / 2 );
-				material = new THREE.MeshBasicMaterial( { color: 0x90c1ed } );
+				material = new THREE.MeshLambertMaterial( { vertexColors: THREE.FaceColors } );
+				
 				var noise = new PerlinNoise();
-
 				for (i = 0; i < geometry.vertices.length; i++) {
 					var vertex = geometry.vertices[ i ];
-					vertex.y = vertex.y + 10*noise.perlin(vertex.x, vertex.y, vertex.z);
-					if (i % 10 == 0 && i < 100) {
-						console.log(vertex.x)
-						console.log(vertex.y);
-					}
+					vertex.y = vertex.y + 20*noise.perlin(vertex.x, vertex.y, vertex.z);
 				}
-			
-			
+
+				var face;
+				for (var i = 0; i < geometry.faces.length; i++) {
+					face = geometry.faces[i];
+					face.vertexColors[0] = new THREE.Color(0xfba7c1);
+					face.vertexColors[1] = new THREE.Color(0xffbac9);
+					face.vertexColors[2] = new THREE.Color(0xffcec2);
+				}
+
 				floor = new THREE.Mesh( geometry, material );
 				scene.add( floor );
 
+				f = new Fireworks(scene, 6);
+				// scene.add(f.missile);
 
 				// === Setup renderer
 				renderer = new THREE.WebGLRenderer();
@@ -121,14 +145,11 @@
 				renderer.setSize( window.innerWidth, window.innerHeight );
 				document.body.appendChild( renderer.domElement );
 
-
-
 			}
 
 			function animate() {
 				requestAnimationFrame( animate );
-
-
+				f.lightshow();
 				renderer.render( scene, camera );
 			}
 
