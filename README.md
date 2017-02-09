@@ -7,7 +7,6 @@ Link to GitHub Pages site
 # Techniques used, and why those techniques
 To generate the pseudorandom terrain, I used a Perlin Noise implementation to add noise to the y-values of the floor plane. 
 
-
 # Instructions on building/assembling/etc. Also document how to run the code
 
 

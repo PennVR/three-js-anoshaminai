@@ -42,33 +42,35 @@ class Sparkly {
     }
 
 
-    explode(scene, x, y, z) {
-        for (var x = 0; x < 4; x++) {
+    explode(scene, f_x, f_y, f_z) {
+        for (var i = 0; i < 4; i++) {
             var bitGeo = new THREE.IcosahedronGeometry(0.25);
             var bitMat = new THREE.MeshLambertMaterial({color: 0xffe100,  emissive: 0xa4f7f9, emissiveIntensity: 0.3 });
             var bit = new THREE.Mesh(bitGeo, bitMat);
             scene.add(bit);
-            bit.position.z = z;
-            bit.position.y = y;
-            bit.position.x = x;
-            this.bits[x] = bit;
+            bit.position.z = f_z;
+            bit.position.y = f_y;
+            bit.position.x = f_x;
+            this.bits[i] = bit;
+            console.log(bit.position.x);
         }
         console.log("explode called");
         
     }
+
 
     explosionTraj() {
         for (var i = 0; i < this.bits.length; i++) {
             var b = this.bits[i];
 
             if (i === 0) {
-                b.position.x += 0.01
-            } else if (i === 1) {
-                b.position.x -= 0.01;
-            } else if (i === 2) {
                 b.position.x += 0.02
+            } else if (i === 1) {
+                b.position.x -= 0.025;
+            } else if (i === 2) {
+                b.position.x += 0.04
             } else {
-                b.position.x -= 0.02;
+                b.position.x -= 0.044;
             }
 
             if (b.position.y > 1) {

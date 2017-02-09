@@ -16,8 +16,9 @@ class Fireworks {
     }
 
     genSparkly() {
-        var x = Math.floor(Math.random() * 150) + 1;
+        var x = Math.floor(Math.random() * 200) + 1;
         x *= Math.floor(Math.random() * 2) == 1 ? 1 : -1;
+        console.log(x);
         return new Sparkly(x, 10, -(Math.random() * 10 + 30), Math.random());
     }
 
@@ -36,6 +37,9 @@ class Fireworks {
                 this.fireworks.splice(i,1);
                 f.explode(this.scene, f_x, f_y, f_z);
                 this.explosions.push(f);
+                console.log(f_x);
+                console.log(f_y);
+                console.log(f_z);
                 console.log("explosion");
                 f.explodeStatus = false;
             }
@@ -56,7 +60,7 @@ class Fireworks {
         }
 
         var newExp = Math.random();
-        if (newExp < 0.2 && this.fireworks.length < 10) {
+        if (newExp < 0.05 && this.fireworks.length < 8) {
             var f = this.genSparkly();
             this.fireworks.push(f);
             scene.add(f);
